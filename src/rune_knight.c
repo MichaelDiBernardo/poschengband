@@ -81,7 +81,7 @@ cptr rune_desc(int which)
     case RUNE_UNDERSTANDING:
         return "<<Understanding>>";
     case RUNE_ELEMENTAL_PROTECTION:
-        return "<<Elemental Protection>>";
+        return "<<Security>>";
     case RUNE_HASTE:
         return "<<Haste>>";
     case RUNE_SEEING:
@@ -126,7 +126,7 @@ bool rune_add(object_type *o_ptr, int which, bool prompt)    /* Birthing needs a
     if (prompt)
     {
         if (!get_check(
-                format("Really add %^s to %^s?", 
+                format("Really add %^s to %^s?",
                     rune_desc(which), o_name))) return FALSE;
     }
 
@@ -215,7 +215,7 @@ bool rune_add(object_type *o_ptr, int which, bool prompt)    /* Birthing needs a
             add_flag(o_ptr->art_flags, TR_RES_DISEN);
         }
         break;
-    
+
     case RUNE_REFLECTION:
         add_flag(o_ptr->art_flags, TR_REFLECT);
         break;
@@ -302,10 +302,10 @@ static object_type *_rune_object_prompt(object_pred pred)
 
     item_tester_hook = pred;
 
-    if (get_item(&item, 
-                 "Enchant which item?", 
-                 "You have nothing to enchant.", 
-                 (USE_EQUIP | USE_INVEN | USE_FLOOR))) 
+    if (get_item(&item,
+                 "Enchant which item?",
+                 "You have nothing to enchant.",
+                 (USE_EQUIP | USE_INVEN | USE_FLOOR)))
     {
         if (item >= 0) /* Pack */
             result = &inventory[item];
@@ -395,7 +395,7 @@ static void _rune_of_protection_spell(int cmd, variant *res)
 
         if (o_ptr)
             var_set_bool(res, rune_add(o_ptr, RUNE_PROTECTION, TRUE));
-        
+
         break;
     }
     case SPELL_COST_EXTRA:
@@ -433,7 +433,7 @@ static void _rune_of_regeneration_spell(int cmd, variant *res)
 
         if (o_ptr)
             var_set_bool(res, rune_add(o_ptr, RUNE_REGENERATION, TRUE));
-        
+
         break;
     }
     case SPELL_COST_EXTRA:
@@ -449,7 +449,7 @@ static bool _rune_of_fire_pred(object_type *o_ptr)
 {
     if ( object_is_body_armour(o_ptr)
       || object_is_melee_weapon(o_ptr)
-      || object_is_shield(o_ptr) 
+      || object_is_shield(o_ptr)
       || o_ptr->tval == TV_CLOAK
       || (o_ptr->tval == TV_GLOVES && p_ptr->lev >= 45)
       || o_ptr->tval == TV_LITE )
@@ -524,7 +524,7 @@ static bool _rune_of_water_pred(object_type *o_ptr)
 {
     if ( object_is_body_armour(o_ptr)
       || object_is_melee_weapon(o_ptr)
-      || object_is_shield(o_ptr) 
+      || object_is_shield(o_ptr)
       || o_ptr->tval == TV_CLOAK
       || (o_ptr->tval == TV_GLOVES && p_ptr->lev >= 45) )
     {
@@ -707,7 +707,7 @@ static void _rune_of_elemental_protection_spell(int cmd, variant *res)
     switch (cmd)
     {
     case SPELL_NAME:
-        var_set_string(res, "Rune of Protection");
+        var_set_string(res, "Rune of Security");
         break;
     case SPELL_DESC:
         var_set_string(res, "Creates a standalone rune. As long as you have this rune in your inventory, your inventory items are less likely to be destroyed by elemental attacks.");
@@ -963,8 +963,8 @@ static void _rune_of_death_spell(int cmd, variant *res)
 
 static bool _rune_of_mind_pred(object_type *o_ptr)
 {
-    if ( o_ptr->tval == TV_HELM 
-      || o_ptr->tval == TV_LITE ) 
+    if ( o_ptr->tval == TV_HELM
+      || o_ptr->tval == TV_LITE )
     {
         return TRUE;
     }
@@ -998,8 +998,8 @@ static void _rune_of_mind_spell(int cmd, variant *res)
 
 static bool _rune_of_might_pred(object_type *o_ptr)
 {
-    if ( object_is_body_armour(o_ptr) 
-      || o_ptr->tval == TV_HELM ) 
+    if ( object_is_body_armour(o_ptr)
+      || o_ptr->tval == TV_HELM )
     {
         return TRUE;
     }
@@ -1033,8 +1033,8 @@ static void _rune_of_might_spell(int cmd, variant *res)
 
 static bool _rune_of_destruction_pred(object_type *o_ptr)
 {
-    if ( object_is_melee_weapon(o_ptr) 
-      || o_ptr->tval == TV_GLOVES ) 
+    if ( object_is_melee_weapon(o_ptr)
+      || o_ptr->tval == TV_GLOVES )
     {
         return TRUE;
     }
@@ -1095,9 +1095,9 @@ static void _rune_of_good_fortune_spell(int cmd, variant *res)
 
 static bool _rune_of_immortality_pred(object_type *o_ptr)
 {
-    if ( object_is_shield(o_ptr) 
+    if ( object_is_shield(o_ptr)
       || object_is_body_armour(o_ptr)
-      || o_ptr->tval == TV_HELM 
+      || o_ptr->tval == TV_HELM
       || o_ptr->tval == TV_CLOAK )
     {
         return TRUE;
@@ -1235,7 +1235,7 @@ static int _get_spells_imp(spell_info* spells, int max, _spell_group *spell_grou
     int i;
     int ct = 0;
     int stat_idx = p_ptr->stat_ind[A_INT];
-    
+
     for (i = 0; ; i++)
     {
         spell_info *base = &spell_group->spells[i];
@@ -1248,7 +1248,7 @@ static int _get_spells_imp(spell_info* spells, int max, _spell_group *spell_grou
             current->level = base->level;
             current->cost = base->cost;
 
-            current->fail = calculate_fail_rate(base->level, base->fail, stat_idx);            
+            current->fail = calculate_fail_rate(base->level, base->fail, stat_idx);
             ct++;
         }
     }
